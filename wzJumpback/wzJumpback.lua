@@ -60,7 +60,7 @@ zJSel = {
 function zJDoCollect()
 	zJSel.tEnemies = {}
 	zJSel.nPointer = 0
-	local player = GetClientPlayer();
+	local player = GetClientPlayer()
 	local tPlayers = wzUtil.Scene_GetPlayerList()
 	for i, dwID in ipairs(tPlayers) do
 		if IsEnemy(player.dwID, dwID) then
@@ -107,16 +107,16 @@ function zJSelPanel.OnFrameBreathe()
 	
 	local tTeam = GetClientTeam()
 	local tTeamMarks = nil
-	if tTeam ~= nil then
+	if tTeam then
 		tTeamMarks = tTeam.GetTeamMark()
 	end
 	
 	for i = 1, 5 do
-		if zJSel.tEnemies[i] ~= nil then
+		if zJSel.tEnemies[i] then
 			local button = frame:Lookup("Button_Enemy"..tostring(i))
 			local text = button:Lookup("", "Text_Enemy"..tostring(i))
 			local enemy = GetPlayer(zJSel.tEnemies[i])
-			if enemy ~= nil then
+			if enemy then
 				local szShow = zJSelPanel.tDatas[i].szFront
 				local bChange = false
 				
@@ -191,7 +191,7 @@ end
 function zJSelPanel.OnLButtonClick()
 	local name = this:GetName()
 	for i = 1, 5 do
-		if name == "Button_Enemy"..tostring(i) and zJSel.tEnemies[i] ~= nil then
+		if name == "Button_Enemy"..tostring(i) and zJSel.tEnemies[i] then
 			SetTarget(TARGET.PLAYER, zJSel.tEnemies[i])
 			break
 		end
@@ -207,16 +207,16 @@ function zJSelPanel:Collect()
 	
 	local tTeam = GetClientTeam()
 	local tTeamMarks = nil
-	if tTeam ~= nil then
+	if tTeam then
 		tTeamMarks = tTeam.GetTeamMark()
 	end
 	
 	for i = 1, 5 do
 		local button = frame:Lookup("Button_Enemy"..tostring(i))
 		local text = button:Lookup("", "Text_Enemy"..tostring(i))
-		if zJSel.tEnemies[i] ~= nil then
+		if zJSel.tEnemies[i] then
 			local enemy = GetPlayer(zJSel.tEnemies[i])
-			if enemy ~= nil then
+			if enemy then
 				local szName = enemy.szName
 				if string.len(szName) > 12 then
 					szName = string.sub(szName, 1, 12).."..."
